@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    crossorigin="anonymous">
+</head>
+
+<body background="img/Verbos-irregulares-ingles.jpg"></body>
+<body>
+    <div class="container">
+        <div class="row">
+            <button type="button" class="btn btn-block btn-primary" id="contador">0</button>
+            <button type="button" class="btn btn-block btn-danger" id="verboEspañol"></button>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <button type="button" class="btn btn-block btn-secondary" id="tiempoVerbal1">Left</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-block btn-secondary" id="tiempoVerbal2">Middle</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-block btn-secondary" id="tiempoVerbal3">Right</button>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <button type="button" class="btn btn-block btn-dark" id="botonCorregir" onclick="corrige()">Corregir</button>
+        </div>
+    </div>
+    <script src="js/VerbosIrregulares.js"></script>
+
+    <script>
+
+        var tiempoVerbal=0;
+        var verbo=0;
+        var iniciado=0;
+        var contador=0;
+
+        function corrige(){
+
+            if(iniciado==0){
+                iniciado=1;
+
+                var verboEscrito=document.getElementById('caja').value;
+                document.getElementById('botonCorregir').classList.remove('btn-danger');
+                document.getElementById('botonCorregir').classList.remove('btn-success');
+                document.getElementById('botonCorregir').classList.remove('btn-dark');
+
+                if(verbos[verbo][tiempoVerbal]==verboEscrito){
+                    contador++;
+                    document.getElementById('botonCorregir').classList.add('btn-success');
+                    document.getElementById('botonCorregir').innerText="WOW, It's correct!";
+                }else{
+                    contador--;
+                    document.getElementById('botonCorregir').classList.add('btn-danger');
+                    document.getElementById('botonCorregir').innerText=verbos[verbo][tiempoVerbal];
+                }
+
+            }
+        }
+
+        function verboRandom(){
+            var verbo = Math.floor(Math.random()*verbos.length);
+            var tiempoVerbal=Math.floor(Math.random()*3);
+            console.log(tiempoVerbal)
+            document.getElementById('verboEspañol').innerHTML=verbos[verbo][3];
+
+            if(tiempoVerbal==0){
+                document.getElementById('tiempoVerbal1').innerHTML='<input id="caja" class="form-control">';
+            }else{
+                document.getElementById('tiempoVerbal1').innerHTML=verbos[verbo][0];
+
+            }
+            if(tiempoVerbal==1){
+                document.getElementById('tiempoVerbal2').innerHTML='<input id="caja" class="form-control">';
+            }else{
+                document.getElementById('tiempoVerbal2').innerHTML=verbos[verbo][1];
+
+            }
+            if(tiempoVerbal==2){
+                document.getElementById('tiempoVerbal3').innerHTML='<input id="caja" class="form-control">';
+            }else{
+                document.getElementById('tiempoVerbal3').innerHTML=verbos[verbo][2];
+
+            }
+            
+            
+        }
+        verboRandom();
+
+        
+        
+    </script>
+    
+</body>
+</html>
